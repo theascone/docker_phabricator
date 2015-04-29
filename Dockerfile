@@ -1,32 +1,48 @@
-FROM debian:jessie
+FROM \
+    debian:jessie
 
-MAINTAINER Addis Dittebrandt <addis.dittebrandt@gmail.com>
-
-RUN \
-  apt-get update
-
-RUN \
-  apt-get -y dist-upgrade
+MAINTAINER \
+    Addis Dittebrandt <addis.dittebrandt@gmail.com>
 
 RUN \
-  apt-get -y install \
-    supervisor \
-    nginx \
-    php-fpm \
-    openssh-server \
-    git \
-    mercurial \
-    subversion \
+    apt-get update
 
 RUN \
-  apt-get clean
-
-WORKDIR /opt/
+    apt-get -y dist-upgrade
 
 RUN \
-  git clone https://github.com/phacility/libphutil.git \
-  git clone https://github.com/phacility/arcanist.git \
-  git clone https://github.com/phacility/phabricator.git \
+    apt-get -y install \
+        supervisor \
+        nginx \
+        php-cli \
+        php-fpm \
+        php5 \
+        php5-mysql \
+        php5-curl \
+        php5-json \
+        php5-gd \
+        php-apc \
+        openssh-server \
+        git \
+        mercurial \
+        subversion
 
-EXPOSE 80
-EXPOSE 22280
+RUN \
+    apt-get clean
+
+WORKDIR \
+    /opt/
+
+RUN \
+    git clone https://github.com/phacility/libphutil.git
+
+RUN \
+    git clone https://github.com/phacility/arcanist.git
+
+RUN \
+    git clone https://github.com/phacility/phabricator.git
+
+EXPOSE \
+    80
+EXPOSE \
+    22280
