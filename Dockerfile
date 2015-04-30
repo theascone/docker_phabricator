@@ -29,8 +29,11 @@ RUN \
 RUN \
     apt-get clean
 
+RUN \
+    mkdir /opt/phabricator/
+
 WORKDIR \
-    /opt/
+    /opt/phabricator/
 
 RUN \
     git clone https://github.com/phacility/libphutil.git
