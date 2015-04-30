@@ -19,6 +19,8 @@ RUN \
         php5-json \
         php5-gd \
         php-apc \
+        npm \
+        nodejs \
         openssh-server \
         git \
         mercurial \
