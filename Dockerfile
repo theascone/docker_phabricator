@@ -14,8 +14,8 @@ RUN \
     apt-get -y install \
         supervisor \
         nginx \
-        php-cli \
-        php-fpm \
+        php5-cli \
+        php5-fpm \
         php5 \
         php5-mysql \
         php5-curl \
