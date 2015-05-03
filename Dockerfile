@@ -44,7 +44,13 @@ RUN \
 RUN \
     git clone https://github.com/phacility/phabricator.git
 
+ENV SUPERVISORD_CONF /opt/supervisord.conf
+ADD \
+    supervisord.conf $SUPERVISORD_CONF
+
 EXPOSE \
     80
 EXPOSE \
     22280
+
+CMD supervisord -c $SUPERVISORD_CONF
