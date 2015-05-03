@@ -42,6 +42,10 @@ ADD VAR_SUPERVISORD_DIR/supervisord.conf $SUPERVISORD_DIR
 
 WORKDIR /
 
+RUN mkdir /var/run/lighttpd
+RUN chown www-data:www-data /var/run/lighttpd
+RUN chmod 0750 /var/run/lighttpd
+
 ADD etc_lighttpd_conf-available/20-rewrite.conf     /etc/lighttpd/conf-available/
 ADD etc_lighttpd_conf-available/30-phabricator.conf /etc/lighttpd/conf-available/
 
