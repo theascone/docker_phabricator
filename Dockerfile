@@ -42,6 +42,14 @@ ADD supervisord.conf $SUPERVISORD_DIR
 
 WORKDIR /
 
+ADD etc_lighttpd_conf-available/20-rewrite.conf     /etc/lighttpd/conf-available
+ADD etc_lighttpd_conf-available/30-phabricator.conf /etc/lighttpd/conf-available
+
+RUN lighttpd-enable-mod fastcgi
+RUN lighttpd-enable-mod fastcgi-php
+RUN lighttpd-enable-mod rewrite
+RUN lighttpd-enable-mod phabricator
+
 EXPOSE 80
 EXPOSE 22280
 
