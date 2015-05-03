@@ -38,7 +38,7 @@ ENV SUPERVISORD_DIR /opt/supervisord/
 RUN mkdir $SUPERVISORD_DIR
 WORKDIR $SUPERVISORD_DIR
 
-ADD supervisord.conf .
+ADD supervisord.conf $SUPERVISORD_DIR
 
 WORKDIR /
 
