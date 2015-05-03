@@ -54,6 +54,7 @@ RUN lighttpd-enable-mod fastcgi-php
 RUN lighttpd-enable-mod rewrite
 RUN lighttpd-enable-mod phabricator
 
+EXPOSE 22
 EXPOSE 80
 EXPOSE 22280
 
