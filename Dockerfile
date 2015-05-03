@@ -10,9 +10,9 @@ RUN \
 RUN \
     apt-get -y install \
         supervisor \
-        nginx \
+        lighttpd \
         php5-cli \
-        php5-fpm \
+        php5-cgi \
         php5 \
         php5-mysql \
         php5-curl \
