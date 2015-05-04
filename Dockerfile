@@ -30,9 +30,15 @@ ENV PHABRICATOR_DIR /opt/phabricator/
 RUN mkdir $PHABRICATOR_DIR
 WORKDIR $PHABRICATOR_DIR
 
+ADD VAR_PHABRICATOR_DIR/phabricator.sh $PHABRICATOR_DIR
+
 RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
 RUN git clone https://github.com/phacility/phabricator.git
+
+WORKDIR $PHABRICATOR_DIR/phabricator/support/aphlict/server/
+
+RUN npm install ws
 
 ENV SUPERVISORD_DIR /opt/supervisord/
 RUN mkdir $SUPERVISORD_DIR
@@ -59,6 +65,11 @@ RUN lighttpd-enable-mod fastcgi
 RUN lighttpd-enable-mod fastcgi-php
 RUN lighttpd-enable-mod rewrite
 RUN lighttpd-enable-mod phabricator
+
+RUN mkfifo /tmp/fifo
+
+RUN useradd phd
+RUN useradd vcs
 
 EXPOSE 22
 EXPOSE 80
