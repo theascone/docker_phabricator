@@ -73,6 +73,8 @@ RUN lighttpd-enable-mod fastcgi-php
 RUN lighttpd-enable-mod rewrite
 RUN lighttpd-enable-mod phabricator
 
+RUN sed -i "s/disable_functions/;disable_functions/g" /etc/php5/cgi/php.ini
+
 EXPOSE 22
 EXPOSE 80
 EXPOSE 22280
