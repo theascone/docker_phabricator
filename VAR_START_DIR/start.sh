@@ -1,1 +1,1 @@
-exec supervisord -c $SUPERVISORD_DIR
+exec supervisord -c $SUPERVISORD_DIR/supervisord.conf
