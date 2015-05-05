@@ -66,8 +66,6 @@ RUN lighttpd-enable-mod fastcgi-php
 RUN lighttpd-enable-mod rewrite
 RUN lighttpd-enable-mod phabricator
 
-RUN mkfifo /tmp/fifo
-
 RUN useradd phd
 RUN useradd vcs
 
