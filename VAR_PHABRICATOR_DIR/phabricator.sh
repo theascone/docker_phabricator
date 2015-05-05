@@ -1,9 +1,19 @@
 cd $PHABRICATOR_DIR
 
+hterm()
+{
+    echo "Stopping: phd aphlict"
+
+    phabricator/bin/phd stop
+    phabricator/bin/aphlict stop
+}
+
+echo "Starting: phd aphlict"
+
 phabricator/bin/phd start
 phabricator/bin/aphlict start
 
-#TODO: Wait for SIGTERM
+trap "hterm" TERM INT
 
-phabricator/bin/phd stop
-phabricator/bin/aphlict stop
+#Wait for signals
+tailf /dev/null
