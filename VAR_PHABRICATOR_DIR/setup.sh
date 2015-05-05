@@ -6,4 +6,4 @@ $PHABRICATOR_DIR/phabricator/bin/config set mysql.pass $MYSQL_PASS
 
 $PHABRICATOR_DIR/phabricator/bin/storage --force upgrade
 
-$PHABRICATOR_DIR/bin/config set phabricator.base-uri 'http://'$HOSTNAME
+$PHABRICATOR_DIR/phabricator/bin/config set phabricator.base-uri 'http://'$HOSTNAME
