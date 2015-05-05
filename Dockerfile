@@ -74,6 +74,7 @@ RUN lighttpd-enable-mod rewrite
 RUN lighttpd-enable-mod phabricator
 
 RUN sed -i "s/disable_functions/;disable_functions/g" /etc/php5/cgi/php.ini
+RUN sed -i "s/post_max_size =.*/post_max_size = 32M/g" /etc/php5/cgi/php.ini
 
 EXPOSE 22
 EXPOSE 80
