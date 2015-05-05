@@ -26,6 +26,9 @@ RUN apt-get -y install \
 
 RUN apt-get clean
 
+RUN useradd phd
+RUN useradd vcs
+
 ENV PHABRICATOR_DIR /opt/phabricator
 RUN mkdir $PHABRICATOR_DIR
 WORKDIR $PHABRICATOR_DIR
@@ -39,6 +42,9 @@ RUN git clone https://github.com/phacility/phabricator.git
 WORKDIR $PHABRICATOR_DIR/phabricator/support/aphlict/server/
 
 RUN npm install ws
+
+WORKDIR $PHABRICATOR_DIR
+RUN chown -R phd .
 
 ENV SUPERVISORD_DIR /opt/supervisord
 RUN mkdir $SUPERVISORD_DIR
@@ -65,9 +71,6 @@ RUN lighttpd-enable-mod fastcgi
 RUN lighttpd-enable-mod fastcgi-php
 RUN lighttpd-enable-mod rewrite
 RUN lighttpd-enable-mod phabricator
-
-RUN useradd phd
-RUN useradd vcs
 
 EXPOSE 22
 EXPOSE 80
