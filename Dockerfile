@@ -26,7 +26,7 @@ RUN apt-get -y install \
 
 RUN apt-get clean
 
-ENV PHABRICATOR_DIR /opt/phabricator/
+ENV PHABRICATOR_DIR /opt/phabricator
 RUN mkdir $PHABRICATOR_DIR
 WORKDIR $PHABRICATOR_DIR
 
@@ -40,13 +40,13 @@ WORKDIR $PHABRICATOR_DIR/phabricator/support/aphlict/server/
 
 RUN npm install ws
 
-ENV SUPERVISORD_DIR /opt/supervisord/
+ENV SUPERVISORD_DIR /opt/supervisord
 RUN mkdir $SUPERVISORD_DIR
 WORKDIR $SUPERVISORD_DIR
 
 ADD VAR_SUPERVISORD_DIR/supervisord.conf $SUPERVISORD_DIR
 
-ENV START_DIR /opt/start/
+ENV START_DIR /opt/start
 RUN mkdir $START_DIR
 WORKDIR $START_DIR
 
