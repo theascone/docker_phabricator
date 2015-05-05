@@ -30,7 +30,7 @@ ENV PHABRICATOR_DIR /opt/phabricator
 RUN mkdir $PHABRICATOR_DIR
 WORKDIR $PHABRICATOR_DIR
 
-ADD VAR_PHABRICATOR_DIR/phabricator.sh $PHABRICATOR_DIR
+ADD VAR_PHABRICATOR_DIR/phabricator.sh $PHABRICATOR_DIR/
 
 RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
@@ -44,13 +44,13 @@ ENV SUPERVISORD_DIR /opt/supervisord
 RUN mkdir $SUPERVISORD_DIR
 WORKDIR $SUPERVISORD_DIR
 
-ADD VAR_SUPERVISORD_DIR/supervisord.conf $SUPERVISORD_DIR
+ADD VAR_SUPERVISORD_DIR/supervisord.conf $SUPERVISORD_DIR/
 
 ENV START_DIR /opt/start
 RUN mkdir $START_DIR
 WORKDIR $START_DIR
 
-ADD VAR_START_DIR/start.sh $START_DIR
+ADD VAR_START_DIR/start.sh $START_DIR/
 
 WORKDIR /
 
