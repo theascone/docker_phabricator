@@ -34,6 +34,7 @@ RUN mkdir $PHABRICATOR_DIR
 WORKDIR $PHABRICATOR_DIR
 
 ADD VAR_PHABRICATOR_DIR/phabricator.sh $PHABRICATOR_DIR/
+ADD VAR_PHABRICATOR_DIR/setup.sh $PHABRICATOR_DIR/
 
 RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
