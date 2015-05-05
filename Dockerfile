@@ -47,6 +47,10 @@ RUN npm install ws
 WORKDIR $PHABRICATOR_DIR
 RUN chown -R phd .
 
+ENV REPO_DIR /var/repo
+RUN mkdir -p $REPO_DIR
+RUN chown -R phd $REPO_DIR
+
 ENV SUPERVISORD_DIR /opt/supervisord
 RUN mkdir $SUPERVISORD_DIR
 WORKDIR $SUPERVISORD_DIR
