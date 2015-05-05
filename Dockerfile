@@ -18,7 +18,7 @@ RUN apt-get -y install \
     php5-gd \
     php-apc \
     npm \
-    nodejs \
+    nodejs-legacy \
     openssh-server \
     git \
     mercurial \
