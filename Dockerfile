@@ -28,8 +28,8 @@ RUN apt-get -y install \
 
 RUN apt-get clean
 
-RUN useradd phd
-RUN useradd vcs
+RUN useradd -d / phd
+RUN useradd -d / vcs
 
 ENV PHABRICATOR_DIR /opt/phabricator
 RUN mkdir $PHABRICATOR_DIR
