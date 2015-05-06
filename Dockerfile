@@ -81,6 +81,8 @@ RUN lighttpd-enable-mod phabricator
 RUN sed -i "s/disable_functions/;disable_functions/g" /etc/php5/cgi/php.ini
 RUN sed -i "s/post_max_size =.*/post_max_size = 32M/g" /etc/php5/cgi/php.ini
 
+RUN mkdir /var/run/sshd
+
 RUN sed -i "s/#includedir/includedir/g" /etc/sudoers
 ADD etc_sudoers.d/30-phabricator /etc/sudoers.d/
 
