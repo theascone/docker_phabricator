@@ -30,6 +30,9 @@ RUN apt-get clean
 RUN useradd phd
 RUN useradd vcs
 
+RUN sed -i "s/#includedir/includedir/g" /etc/sudoers
+ADD etc_sudoers.d/30-phabricator /etc/sudoers.d/
+
 ENV PHABRICATOR_DIR /opt/phabricator
 RUN mkdir $PHABRICATOR_DIR
 WORKDIR $PHABRICATOR_DIR
