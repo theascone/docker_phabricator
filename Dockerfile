@@ -23,7 +23,8 @@ RUN apt-get -y install \
     openssh-server \
     git \
     mercurial \
-    subversion
+    subversion \
+    python-pygments
 
 RUN apt-get clean
 
