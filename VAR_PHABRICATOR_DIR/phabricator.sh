@@ -2,8 +2,8 @@ hterm()
 {
     echo "Stopping: phd aphlict"
 
-    $PHABRICATOR_DIR/phabricator/bin/phd stop
     $PHABRICATOR_DIR/phabricator/bin/aphlict stop
+    $PHABRICATOR_DIR/phabricator/bin/phd stop
 }
 
 echo "Starting: phd aphlict"
