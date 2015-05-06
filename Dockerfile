@@ -91,6 +91,9 @@ RUN cp $PHABRICATOR_DIR/phabricator/resources/sshd/phabricator-ssh-hook.sh /usr/
 RUN chown root  /usr/libexec/phabricator-ssh-hook.sh
 RUN chmod 755   /usr/libexec/phabricator-ssh-hook.sh
 
+RUN sed -i "s/^VCSUSER.*/VCSUSER=\"vcs\"/g" /usr/libexec/phabricator-ssh-hook.sh
+RUN sed -i "s|^ROOT.*|ROOT=$PHABRICATOR_DIR/phabricator|g" /usr/libexec/phabricator-ssh-hook.sh
+
 RUN cp $PHABRICATOR_DIR/phabricator/resources/sshd/sshd_config.phabricator.example /etc/ssh/sshd_config.phabricator
 
 EXPOSE 22
