@@ -96,6 +96,9 @@ RUN sed -i "s|^ROOT.*|ROOT=\"$PHABRICATOR_DIR/phabricator\"|g" /usr/libexec/phab
 
 RUN cp $PHABRICATOR_DIR/phabricator/resources/sshd/sshd_config.phabricator.example /etc/ssh/sshd_config.phabricator
 
+RUN sed -i "s|^AuthorizedKeysCommandUser\s.*|AuthorizedKeysCommandUser vcs|g" /etc/ssh/sshd_config.phabricator
+RUN sed -i "s|^AllowUsers\s.*|AllowUsers vcs|g" /etc/ssh/sshd_config.phabricator
+
 EXPOSE 22
 EXPOSE 80
 EXPOSE 22280
