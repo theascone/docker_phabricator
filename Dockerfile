@@ -89,7 +89,6 @@ RUN sed -i "s/^\(;\?\)opcache\.validate_timestamps.*/opcache.validate_timestamps
 
 RUN mkdir /var/run/sshd
 
-RUN sed -i "s/#includedir/includedir/g" /etc/sudoers
 ADD etc_sudoers.d/30-phabricator /etc/sudoers.d/
 
 RUN sed -i "s/vcs\:\(\!\|\!\!\)/vcs\:NP/g" /etc/shadow
