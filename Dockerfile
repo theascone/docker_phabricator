@@ -84,7 +84,7 @@ RUN sed -i "s/post_max_size =.*/post_max_size = 32M/g" /etc/php5/cgi/php.ini
 RUN sed -i "s/#includedir/includedir/g" /etc/sudoers
 ADD etc_sudoers.d/30-phabricator /etc/sudoers.d/
 
-RUN sed "s/vcs\:\(\!\|\!\!\)/vcs\:NP/g" /etc/shadow
+RUN sed -i "s/vcs\:\(\!\|\!\!\)/vcs\:NP/g" /etc/shadow
 
 EXPOSE 22
 EXPOSE 80
