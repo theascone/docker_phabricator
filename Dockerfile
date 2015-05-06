@@ -110,4 +110,6 @@ EXPOSE 22
 EXPOSE 80
 EXPOSE 22280
 
+VOLUME /var/repo /var/storage
+
 CMD $START_DIR/start.sh
