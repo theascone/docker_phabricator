@@ -6,12 +6,17 @@ hterm()
     $PHABRICATOR_DIR/phabricator/bin/aphlict stop
 }
 
-echo "Starting: phd aphlict"
+start()
+{
+    echo "Starting: phd aphlict"
 
-$PHABRICATOR_DIR/phabricator/bin/phd start
-$PHABRICATOR_DIR/phabricator/bin/aphlict start
+    $PHABRICATOR_DIR/phabricator/bin/phd start
+    $PHABRICATOR_DIR/phabricator/bin/aphlict start
 
-trap "hterm" TERM INT
+    trap "hterm" TERM INT
 
-#Wait for signals
-tailf /dev/null
+    #Wait for signals
+    tailf /dev/null
+}
+
+su -m -c "start" - phd
