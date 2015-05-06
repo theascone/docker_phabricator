@@ -4,6 +4,8 @@ hterm()
 
     $PHABRICATOR_DIR/phabricator/bin/aphlict stop
     $PHABRICATOR_DIR/phabricator/bin/phd stop
+
+    kill -TERM $child
 }
 
 echo "Starting: phd aphlict"
@@ -15,4 +17,7 @@ $PHABRICATOR_DIR/phabricator/bin/aphlict start
 trap "hterm" TERM INT
 
 #Wait for signals
-tailf /dev/null
+tailf /dev/null &
+
+child=$!
+wait "$child"
