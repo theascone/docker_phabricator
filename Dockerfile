@@ -86,6 +86,12 @@ ADD etc_sudoers.d/30-phabricator /etc/sudoers.d/
 
 RUN sed -i "s/vcs\:\(\!\|\!\!\)/vcs\:NP/g" /etc/shadow
 
+RUN cp $PHABRICATOR_DIR/phabricator/resources/sshd/phabricator-ssh-hook.sh /usr/libexec/
+RUN chown root  /usr/libexec/phabricator-ssh-hook.sh
+RUN chmod 755   /usr/libexec/phabricator-ssh-hook.sh
+
+RUN cp $PHABRICATOR_DIR/phabricator/resources/sshd/sshd_config.phabricator.example /etc/ssh/sshd_config.phabricator
+
 EXPOSE 22
 EXPOSE 80
 EXPOSE 22280
