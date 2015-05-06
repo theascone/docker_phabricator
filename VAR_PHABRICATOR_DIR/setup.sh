@@ -14,3 +14,6 @@ $PHABRICATOR_DIR/phabricator/bin/config set phabricator.base-uri 'http://'$HOSTN
 # Set phd and ssh user
 $PHABRICATOR_DIR/phabricator/bin/config set phd.user phd
 $PHABRICATOR_DIR/phabricator/bin/config set diffusion.ssh-user vcs
+
+# Set local storage path
+$PHABRICATOR_DIR/phabricator/bin/config set storage.local-disk.path $STORAGE_DIR
