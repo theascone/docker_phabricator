@@ -81,6 +81,7 @@ RUN lighttpd-enable-mod phabricator
 
 RUN sed -i "s/disable_functions/;disable_functions/g" /etc/php5/cgi/php.ini
 RUN sed -i "s/post_max_size =.*/post_max_size = 32M/g" /etc/php5/cgi/php.ini
+RUN sed -i "s/^\(;\?\)opcache\.validate_timestamps.*/opcache.validate_timestamps=0/g" /etc/php5/cgi/php.ini
 
 RUN mkdir /var/run/sshd
 
