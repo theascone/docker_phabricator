@@ -83,6 +83,10 @@ RUN sed -i "s/post_max_size =.*/post_max_size = 32M/g" /etc/php5/cgi/php.ini
 
 RUN mkdir /var/run/sshd
 
+ENV SSHD_DIR /opt/sshd
+RUN mkdir $SSHD_DIR
+ADD VAR_SSHD_DIR/start.sh $SSHD_DIR/
+
 RUN sed -i "s/#includedir/includedir/g" /etc/sudoers
 ADD etc_sudoers.d/30-phabricator /etc/sudoers.d/
 
