@@ -55,7 +55,7 @@ RUN chown -R phd $REPO_DIR
 
 ENV STORAGE_DIR /var/storage
 RUN mkdir -p $STORAGE_DIR
-RUN chown -R phd $STORAGE_DIR
+RUN chown -R www-data $STORAGE_DIR
 
 ENV SUPERVISORD_DIR /opt/supervisord
 RUN mkdir $SUPERVISORD_DIR
