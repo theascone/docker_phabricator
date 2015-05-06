@@ -108,6 +108,6 @@ EXPOSE 22
 EXPOSE 80
 EXPOSE 22280
 
-VOLUME /var/repo /var/storage
+VOLUME /var/repo /var/storage /var/tmp /var/log /tmp /run /opt/phabricator/phabricator/conf/local
 
 CMD $START_DIR/start.sh
