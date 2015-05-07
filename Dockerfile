@@ -61,12 +61,6 @@ WORKDIR $SUPERVISORD_DIR
 
 ADD VAR_SUPERVISORD_DIR/supervisord.conf $SUPERVISORD_DIR/
 
-ENV START_DIR /opt/start
-RUN mkdir $START_DIR
-WORKDIR $START_DIR
-
-ADD VAR_START_DIR/start.sh $START_DIR/
-
 WORKDIR /
 
 RUN mkdir /var/run/lighttpd
@@ -110,4 +104,4 @@ EXPOSE 22280
 
 VOLUME /var/repo /var/storage /var/tmp /var/log /tmp /run /opt/phabricator/phabricator/conf/local
 
-CMD $START_DIR/start.sh
+CMD ["supervisord -c /opt/supervisord/supervisord.conf"]
