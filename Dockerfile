@@ -28,6 +28,8 @@ RUN apt-get -y install \
 
 RUN apt-get clean
 
+RUN ln -s /usr/lib/git-core/git-http-backend /usr/bin/
+
 RUN useradd -d / phd
 RUN useradd -d / vcs
 
