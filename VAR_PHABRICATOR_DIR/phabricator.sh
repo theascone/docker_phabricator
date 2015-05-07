@@ -10,6 +10,10 @@ hterm()
     kill -TERM $child
 }
 
+echo "Setting up"
+
+$PHABRICATOR_DIR/setup.sh
+
 echo "Starting: phd aphlict"
 
 $PHABRICATOR_DIR/phabricator/bin/phd start

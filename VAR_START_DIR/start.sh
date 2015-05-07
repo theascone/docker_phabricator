@@ -1,5 +1,15 @@
 #!/bin/sh
 
-su -m -c "$PHABRICATOR_DIR/setup.sh" - phd
+hterm()
+{
+    echo "Stopping"
 
-exec supervisord -c $SUPERVISORD_DIR/supervisord.conf
+    kill -TERM $child
+}
+
+echo "Starting"
+
+supervisord -c $SUPERVISORD_DIR/supervisord.conf &
+
+child=$!
+wait "$child"
