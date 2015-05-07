@@ -104,4 +104,4 @@ EXPOSE 22280
 
 VOLUME /var/repo /var/storage /var/tmp /var/log /tmp /run /opt/phabricator/phabricator/conf/local
 
-CMD ["supervisord -c /opt/supervisord/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/opt/supervisord/supervisord.conf"]
