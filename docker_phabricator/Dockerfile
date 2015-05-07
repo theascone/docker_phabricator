@@ -1,10 +1,6 @@
-FROM debian:jessie
+FROM theascone/docker_phabricator:data_latest
 
 MAINTAINER Addis Dittebrandt <addis.dittebrandt@gmail.com>
-
-WORKDIR /
-
-RUN apt-get update
 
 RUN apt-get -y install \
     sudo \
@@ -30,9 +26,6 @@ RUN apt-get clean
 
 RUN ln -s /usr/lib/git-core/git-http-backend /usr/bin/
 
-RUN useradd -d / phd
-RUN useradd -d / vcs
-
 ENV PHABRICATOR_DIR /opt/phabricator
 RUN mkdir $PHABRICATOR_DIR
 WORKDIR $PHABRICATOR_DIR
@@ -50,12 +43,6 @@ RUN npm install ws
 
 WORKDIR $PHABRICATOR_DIR
 RUN chown -R phd .
-
-RUN mkdir -p /var/repo
-RUN chown -R phd /var/repo
-
-RUN mkdir -p /var/storage
-RUN chown -R www-data /var/storage
 
 ENV SUPERVISORD_DIR /opt/supervisord
 RUN mkdir $SUPERVISORD_DIR
@@ -103,7 +90,5 @@ RUN sed -i "s|^AllowUsers\s.*|AllowUsers vcs|g" /etc/ssh/sshd_config.phabricator
 EXPOSE 22
 EXPOSE 80
 EXPOSE 22280
-
-VOLUME /var/repo /var/storage /var/tmp /var/log /tmp /run /opt/phabricator/phabricator/conf/local
 
 CMD ["/usr/bin/supervisord", "-c", "/opt/supervisord/supervisord.conf"]
