@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Set mysql config
 $PHABRICATOR_DIR/phabricator/bin/config set mysql.host $MYSQL_PORT_3306_TCP_ADDR
 $PHABRICATOR_DIR/phabricator/bin/config set mysql.port $MYSQL_PORT_3306_TCP_PORT

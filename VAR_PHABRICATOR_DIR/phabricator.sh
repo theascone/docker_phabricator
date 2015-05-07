@@ -1,3 +1,5 @@
+#!/bin/sh
+
 hterm()
 {
     echo "Stopping: phd aphlict"
