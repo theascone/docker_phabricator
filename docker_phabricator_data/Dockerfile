@@ -4,9 +4,8 @@ MAINTAINER Addis Dittebrandt <addis.dittebrandt@gmail.com>
 
 RUN apt-get update
 
-RUN useradd -u 10000 -d / phd
-RUN useradd -u 10001 -d / vcs
-RUN useradd -u 10002 -d / www-data
+RUN useradd -d / phd
+RUN useradd -d / vcs
 
 RUN mkdir -p /var/repo
 RUN chown -R phd /var/repo
