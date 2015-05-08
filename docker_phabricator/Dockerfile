@@ -37,6 +37,12 @@ RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
 RUN git clone https://github.com/phacility/phabricator.git
 
+ADD VAR_PHABRICATOR_DIR/phabrictor_conf/custom/base.conf.php    $PHABRICATOR_DIR/phabrictor/conf/custom/
+ADD VAR_PHABRICATOR_DIR/phabrictor_conf/local/ENVIRONMENT       $PHABRICATOR_DIR/phabrictor/conf/local/
+
+RUN ln -s /var/config/preamble.php $PHABRICATOR_DIR/phabricator/support/
+RUN ln -s /var/config/config.conf.php $PHABRICATOR_DIR/phabrictor/conf/custom/
+
 WORKDIR $PHABRICATOR_DIR/phabricator/support/aphlict/server/
 
 RUN npm install ws
