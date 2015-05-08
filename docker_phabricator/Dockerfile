@@ -39,8 +39,7 @@ RUN git clone https://github.com/phacility/phabricator.git
 
 RUN mkdir -p $PHABRICATOR_DIR/phabricator/conf/custom
 
-ADD VAR_PHABRICATOR_DIR/phabricator_conf/custom/base.conf.php    $PHABRICATOR_DIR/phabricator/conf/custom/
-ADD VAR_PHABRICATOR_DIR/phabricator_conf/local/ENVIRONMENT       $PHABRICATOR_DIR/phabricator/conf/local/
+ADD VAR_PHABRICATOR_DIR/phabricator_conf_local/ENVIRONMENT $PHABRICATOR_DIR/phabricator/conf/local/
 
 RUN ln -s /var/config/preamble.php $PHABRICATOR_DIR/phabricator/support/
 RUN ln -s /var/config/config.conf.php $PHABRICATOR_DIR/phabricator/conf/custom/
