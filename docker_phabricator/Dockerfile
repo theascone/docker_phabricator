@@ -37,6 +37,8 @@ RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
 RUN git clone https://github.com/phacility/phabricator.git
 
+RUN mkdir -p $PHABRICATOR_DIR/phabrictor/conf/custom
+
 ADD VAR_PHABRICATOR_DIR/phabrictor_conf/custom/base.conf.php    $PHABRICATOR_DIR/phabrictor/conf/custom/
 ADD VAR_PHABRICATOR_DIR/phabrictor_conf/local/ENVIRONMENT       $PHABRICATOR_DIR/phabrictor/conf/local/
 
