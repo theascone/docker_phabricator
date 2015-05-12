@@ -4,21 +4,21 @@ hterm()
 {
     echo "Stopping: phd aphlict"
 
-    $PHABRICATOR_DIR/phabricator/bin/aphlict stop
-    $PHABRICATOR_DIR/phabricator/bin/phd stop
+    /opt/phabricator/phabricator/bin/aphlict stop
+    /opt/phabricator/phabricator/bin/phd stop
 
     kill -TERM $child
 }
 
 echo "Setting up"
 
-$PHABRICATOR_DIR/setup.sh
+/opt/phabricator/setup.sh
 
 echo "Starting: phd aphlict"
 
-$PHABRICATOR_DIR/phabricator/bin/phd start
-$PHABRICATOR_DIR/phabricator/bin/phd restart
-$PHABRICATOR_DIR/phabricator/bin/aphlict start
+/opt/phabricator/phabricator/bin/phd start
+/opt/phabricator/phabricator/bin/phd restart
+/opt/phabricator/phabricator/bin/aphlict start
 
 trap "hterm" TERM INT
 

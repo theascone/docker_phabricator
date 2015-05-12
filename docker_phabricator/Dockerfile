@@ -26,29 +26,28 @@ RUN apt-get clean
 
 RUN ln -s /usr/lib/git-core/git-http-backend /usr/bin/
 
-ENV PHABRICATOR_DIR /opt/phabricator
-RUN mkdir $PHABRICATOR_DIR
-WORKDIR $PHABRICATOR_DIR
+RUN mkdir /opt/phabricator
+WORKDIR /opt/phabricator
 
-ADD VAR_PHABRICATOR_DIR/phabricator.sh $PHABRICATOR_DIR/
-ADD VAR_PHABRICATOR_DIR/setup.sh $PHABRICATOR_DIR/
+ADD VAR_PHABRICATOR_DIR/phabricator.sh /opt/phabricator/
+ADD VAR_PHABRICATOR_DIR/setup.sh /opt/phabricator/
 
 RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
 RUN git clone https://github.com/phacility/phabricator.git
 
-RUN mkdir -p $PHABRICATOR_DIR/phabricator/conf/custom
+RUN mkdir -p /opt/phabricator/phabricator/conf/custom
 
-ADD VAR_PHABRICATOR_DIR/phabricator_conf_local/ENVIRONMENT $PHABRICATOR_DIR/phabricator/conf/local/
+ADD VAR_PHABRICATOR_DIR/phabricator_conf_local/ENVIRONMENT /opt/phabricator/phabricator/conf/local/
 
-RUN ln -s /var/config/preamble.php $PHABRICATOR_DIR/phabricator/support/
-RUN ln -s /var/config/config.conf.php $PHABRICATOR_DIR/phabricator/conf/custom/
+RUN ln -s /var/config/preamble.php /opt/phabricator/phabricator/support/
+RUN ln -s /var/config/config.conf.php /opt/phabricator/phabricator/conf/custom/
 
-WORKDIR $PHABRICATOR_DIR/phabricator/support/aphlict/server/
+WORKDIR /opt/phabricator/phabricator/support/aphlict/server/
 
 RUN npm install ws
 
-WORKDIR $PHABRICATOR_DIR
+WORKDIR /opt/phabricator
 RUN chown -R phd .
 
 ENV SUPERVISORD_DIR /opt/supervisord
@@ -82,14 +81,14 @@ ADD etc_sudoers.d/30-phabricator /etc/sudoers.d/
 RUN sed -i "s/vcs\:\(\!\|\!\!\)/vcs\:NP/g" /etc/shadow
 
 RUN mkdir /usr/libexec
-RUN cp $PHABRICATOR_DIR/phabricator/resources/sshd/phabricator-ssh-hook.sh /usr/libexec/
+RUN cp /opt/phabricator/phabricator/resources/sshd/phabricator-ssh-hook.sh /usr/libexec/
 RUN chown root  /usr/libexec/phabricator-ssh-hook.sh
 RUN chmod 755   /usr/libexec/phabricator-ssh-hook.sh
 
 RUN sed -i "s/^VCSUSER.*/VCSUSER=\"vcs\"/g" /usr/libexec/phabricator-ssh-hook.sh
-RUN sed -i "s|^ROOT.*|ROOT=\"$PHABRICATOR_DIR/phabricator\"|g" /usr/libexec/phabricator-ssh-hook.sh
+RUN sed -i "s|^ROOT.*|ROOT=\"/opt/phabricator/phabricator\"|g" /usr/libexec/phabricator-ssh-hook.sh
 
-RUN cp $PHABRICATOR_DIR/phabricator/resources/sshd/sshd_config.phabricator.example /etc/ssh/sshd_config.phabricator
+RUN cp /opt/phabricator/phabricator/resources/sshd/sshd_config.phabricator.example /etc/ssh/sshd_config.phabricator
 
 RUN sed -i "s|^AuthorizedKeysCommandUser\s.*|AuthorizedKeysCommandUser vcs|g" /etc/ssh/sshd_config.phabricator
 RUN sed -i "s|^AllowUsers\s.*|AllowUsers vcs|g" /etc/ssh/sshd_config.phabricator
