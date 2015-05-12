@@ -29,8 +29,8 @@ RUN ln -s /usr/lib/git-core/git-http-backend /usr/bin/
 RUN mkdir /opt/phabricator
 WORKDIR /opt/phabricator
 
-ADD VAR_PHABRICATOR_DIR/phabricator.sh /opt/phabricator/
-ADD VAR_PHABRICATOR_DIR/setup.sh /opt/phabricator/
+ADD opt_phabricator/phabricator.sh /opt/phabricator/
+ADD opt_phabricator/setup.sh /opt/phabricator/
 
 RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
@@ -38,7 +38,7 @@ RUN git clone https://github.com/phacility/phabricator.git
 
 RUN mkdir -p /opt/phabricator/phabricator/conf/custom
 
-ADD VAR_PHABRICATOR_DIR/phabricator_conf_local/ENVIRONMENT /opt/phabricator/phabricator/conf/local/
+ADD opt_phabricator/phabricator_conf_local/ENVIRONMENT /opt/phabricator/phabricator/conf/local/
 
 RUN ln -s /var/config/preamble.php /opt/phabricator/phabricator/support/
 RUN ln -s /var/config/config.conf.php /opt/phabricator/phabricator/conf/custom/
