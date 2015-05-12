@@ -1,6 +1,22 @@
-FROM theascone/docker_phabricator:data_latest
+FROM debian:jessie
 
 MAINTAINER Addis Dittebrandt <addis.dittebrandt@gmail.com>
+
+RUN apt-get update
+
+RUN useradd -d / phd
+RUN useradd -d / vcs
+
+RUN mkdir -p /var/repo
+RUN chown -R phd /var/repo
+
+RUN mkdir -p /var/config
+ADD var_config/preamble.php /var/config/
+ADD var_config/config.conf.php /var/config/
+RUN chown -R phd /var/config
+
+RUN mkdir -p /var/storage
+RUN chown -R www-data /var/storage
 
 RUN apt-get -y install \
     sudo \
@@ -95,5 +111,7 @@ RUN sed -i "s|^AllowUsers\s.*|AllowUsers vcs|g" /etc/ssh/sshd_config.phabricator
 EXPOSE 22
 EXPOSE 80
 EXPOSE 22280
+
+VOLUME /var/repo /var/config /var/storage
 
 CMD ["/usr/bin/supervisord", "-c", "/opt/supervisord/supervisord.conf"]
