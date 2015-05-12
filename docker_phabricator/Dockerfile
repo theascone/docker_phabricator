@@ -53,7 +53,7 @@ RUN chown -R phd .
 RUN mkdir /opt/supervisord
 WORKDIR /opt/supervisord
 
-ADD VAR_SUPERVISORD_DIR/supervisord.conf /opt/supervisord/
+ADD opt_supervisord/supervisord.conf /opt/supervisord/
 
 WORKDIR /
 
