@@ -11,8 +11,8 @@ RUN mkdir -p /var/repo
 RUN chown -R phd /var/repo
 
 RUN mkdir -p /var/config
-ADD var_config/preamble.php /var/config/
-ADD var_config/config.conf.php /var/config/
+ADD var/config/preamble.php /var/config/
+ADD var/config/config.conf.php /var/config/
 RUN chown -R phd /var/config
 
 RUN mkdir -p /var/storage
@@ -45,8 +45,8 @@ RUN ln -s /usr/lib/git-core/git-http-backend /usr/bin/
 RUN mkdir /opt/phabricator
 WORKDIR /opt/phabricator
 
-ADD opt_phabricator/phabricator.sh /opt/phabricator/
-ADD opt_phabricator/setup.sh /opt/phabricator/
+ADD opt/phabricator/phabricator.sh /opt/phabricator/
+ADD opt/phabricator/setup.sh /opt/phabricator/
 
 RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
@@ -54,7 +54,7 @@ RUN git clone https://github.com/phacility/phabricator.git
 
 RUN mkdir -p /opt/phabricator/phabricator/conf/custom
 
-ADD opt_phabricator/phabricator_conf_local/ENVIRONMENT /opt/phabricator/phabricator/conf/local/
+ADD opt/phabricator/phabricator/conf/local/ENVIRONMENT /opt/phabricator/phabricator/conf/local/
 
 RUN ln -s /var/config/preamble.php /opt/phabricator/phabricator/support/
 RUN ln -s /var/config/config.conf.php /opt/phabricator/phabricator/conf/custom/
@@ -69,7 +69,7 @@ RUN chown -R phd .
 RUN mkdir /opt/supervisord
 WORKDIR /opt/supervisord
 
-ADD opt_supervisord/supervisord.conf /opt/supervisord/
+ADD opt/supervisord/supervisord.conf /opt/supervisord/
 
 WORKDIR /
 
@@ -77,8 +77,8 @@ RUN mkdir /var/run/lighttpd
 RUN chown www-data:www-data /var/run/lighttpd
 RUN chmod 0750 /var/run/lighttpd
 
-ADD etc_lighttpd_conf-available/20-rewrite.conf     /etc/lighttpd/conf-available/
-ADD etc_lighttpd_conf-available/30-phabricator.conf /etc/lighttpd/conf-available/
+ADD etc/lighttpd/conf-available/20-rewrite.conf     /etc/lighttpd/conf-available/
+ADD etc/lighttpd/conf-available/30-phabricator.conf /etc/lighttpd/conf-available/
 
 RUN lighttpd-enable-mod fastcgi
 RUN lighttpd-enable-mod fastcgi-php
@@ -91,7 +91,7 @@ RUN sed -i "s/^\(;\?\)opcache\.validate_timestamps.*/opcache.validate_timestamps
 
 RUN mkdir /var/run/sshd
 
-ADD etc_sudoers.d/30-phabricator /etc/sudoers.d/
+ADD etc/sudoers.d/30-phabricator /etc/sudoers.d/
 
 RUN sed -i "s/vcs\:\(\!\|\!\!\)/vcs\:NP/g" /etc/shadow
 
