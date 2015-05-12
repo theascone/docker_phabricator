@@ -50,11 +50,10 @@ RUN npm install ws
 WORKDIR /opt/phabricator
 RUN chown -R phd .
 
-ENV SUPERVISORD_DIR /opt/supervisord
-RUN mkdir $SUPERVISORD_DIR
-WORKDIR $SUPERVISORD_DIR
+RUN mkdir /opt/supervisord
+WORKDIR /opt/supervisord
 
-ADD VAR_SUPERVISORD_DIR/supervisord.conf $SUPERVISORD_DIR/
+ADD VAR_SUPERVISORD_DIR/supervisord.conf /opt/supervisord/
 
 WORKDIR /
 
