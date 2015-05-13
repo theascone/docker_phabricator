@@ -1,10 +1,8 @@
-if ! [ -b "/var/config/preamble.php" ]
-then
+if [ ! -f /var/config/preamble.php ]; then
     cp /opt/phabricator/var/config/preamble.php /var/config/
 fi
 
-if ! [ -b "/var/config/config.conf.php" ]
-then
+if [ ! -f /var/config/config.conf.php ]; then
     cp /opt/phabricator/var/config/config.conf.php /var/config/
 fi
 
