@@ -10,10 +10,11 @@ RUN useradd -d / vcs
 RUN mkdir -p /var/repo
 RUN chown -R phd /var/repo
 
+RUN mkdir -p /opt/phabricator/var/config
+ADD opt/phabricator/var/config/preamble.php /opt/phabricator/var/config/
+ADD opt/phabricator/var/config/config.conf.php /opt/phabricator/var/config/
+
 RUN mkdir -p /var/config
-ADD var/config/preamble.php /var/config/
-ADD var/config/config.conf.php /var/config/
-RUN chown -R phd /var/config
 
 RUN mkdir -p /var/storage
 RUN chown -R www-data /var/storage
@@ -41,6 +42,9 @@ RUN apt-get -y install \
 RUN apt-get clean
 
 RUN ln -s /usr/lib/git-core/git-http-backend /usr/bin/
+
+ADD opt/start.sh /opt/
+RUN chmod +x /opt/start.sh
 
 RUN mkdir /opt/phabricator
 WORKDIR /opt/phabricator
@@ -114,4 +118,4 @@ EXPOSE 22280
 
 VOLUME /var/repo /var/config /var/storage
 
-CMD ["/usr/bin/supervisord", "-c", "/opt/supervisord/supervisord.conf"]
+CMD ["/bin/sh", "/opt/start.sh"]
