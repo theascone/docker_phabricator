@@ -8,16 +8,8 @@ RUN useradd -d / phd
 RUN useradd -d / vcs
 
 RUN mkdir -p /var/repo
-RUN chown -R phd /var/repo
-
-RUN mkdir -p /opt/phabricator/var/config
-ADD opt/phabricator/var/config/preamble.php /opt/phabricator/var/config/
-ADD opt/phabricator/var/config/config.conf.php /opt/phabricator/var/config/
-
 RUN mkdir -p /var/config
-
 RUN mkdir -p /var/storage
-RUN chown -R www-data /var/storage
 
 RUN apt-get -y install \
     sudo \
@@ -66,6 +58,10 @@ RUN ln -s /var/config/config.conf.php /opt/phabricator/phabricator/conf/custom/
 WORKDIR /opt/phabricator/phabricator/support/aphlict/server/
 
 RUN npm install ws
+
+RUN mkdir -p /opt/phabricator/var/config
+ADD opt/phabricator/var/config/preamble.php /opt/phabricator/var/config/
+ADD opt/phabricator/var/config/config.conf.php /opt/phabricator/var/config/
 
 WORKDIR /opt/phabricator
 RUN chown -R phd .
