@@ -31,7 +31,9 @@ RUN apt-get -y install \
     subversion \
     python-pygments
 
-RUN apt-get clean
+RUN apt-get -y clean
+RUN apt-get -y autoclean
+RUN apt-get -y autoremove
 
 RUN ln -s /usr/lib/git-core/git-http-backend /usr/bin/
 
