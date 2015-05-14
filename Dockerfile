@@ -4,13 +4,6 @@ MAINTAINER Addis Dittebrandt <addis.dittebrandt@gmail.com>
 
 RUN apt-get update
 
-RUN useradd -d / phd
-RUN useradd -d / vcs
-
-RUN mkdir -p /var/repo
-RUN mkdir -p /var/config
-RUN mkdir -p /var/storage
-
 RUN apt-get -y install \
     sudo \
     supervisor \
@@ -34,6 +27,13 @@ RUN apt-get -y install \
 RUN apt-get -y clean
 RUN apt-get -y autoclean
 RUN apt-get -y autoremove
+
+RUN useradd -d / phd
+RUN useradd -d / vcs
+
+RUN mkdir -p /var/repo
+RUN mkdir -p /var/config
+RUN mkdir -p /var/storage
 
 RUN ln -s /usr/lib/git-core/git-http-backend /usr/bin/
 
