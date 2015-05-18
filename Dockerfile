@@ -28,8 +28,8 @@ RUN apt-get -y clean
 RUN apt-get -y autoclean
 RUN apt-get -y autoremove
 
-RUN useradd -r phd
-RUN useradd -r vcs
+RUN useradd -r -d / phd
+RUN useradd -r -d / vcs
 
 RUN mkdir -p /var/repo
 RUN mkdir -p /var/config
