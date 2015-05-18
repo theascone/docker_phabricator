@@ -80,11 +80,13 @@ RUN chown www-data:www-data /var/run/lighttpd
 RUN chmod 0750 /var/run/lighttpd
 
 ADD etc/lighttpd/conf-available/20-rewrite.conf     /etc/lighttpd/conf-available/
+ADD etc/lighttpd/conf-available/20-setenv.conf      /etc/lighttpd/conf-available/
 ADD etc/lighttpd/conf-available/30-phabricator.conf /etc/lighttpd/conf-available/
 
 RUN lighttpd-enable-mod fastcgi
 RUN lighttpd-enable-mod fastcgi-php
 RUN lighttpd-enable-mod rewrite
+RUN lighttpd-enable-mod setenv
 RUN lighttpd-enable-mod phabricator
 
 RUN sed -i "s/disable_functions/;disable_functions/g" /etc/php5/cgi/php.ini
