@@ -50,11 +50,6 @@ RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
 RUN git clone https://github.com/phacility/phabricator.git
 
-WORKDIR /opt/phabricator/phabricator
-ADD opt/phabricator/preamble.patch /opt/phabricator/
-RUN git apply /opt/phabricator/preamble.patch
-WORKDIR /opt/phabricator
-
 RUN mkdir -p /opt/phabricator/phabricator/conf/custom
 
 ADD opt/phabricator/phabricator/conf/local/ENVIRONMENT /opt/phabricator/phabricator/conf/local/
