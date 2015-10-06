@@ -19,7 +19,7 @@ fi
 #setVar mysql.user "\$MYSQL_PORT" "$MYSQL_USER" "\$MYSQL_ENV_MYSQL_USER" "$MYSQL_ENV_MYSQL_USER"
 
 setVar mysql.user "\$MYSQL_USER" "$MYSQL_USER" "\$MYSQL_ENV_MYSQL_USER" "$MYSQL_ENV_MYSQL_USER"
-setVar mysql.pass "\$MYSQL_PASS" "$MYSQL_PASS" "\$MYSQL_ENV_MYSQL_PASS" "$MYSQL_ENV_MYSQL_PASS"
+setVar mysql.pass "\$MYSQL_PASS" "$MYSQL_PASS" "\$MYSQL_ENV_MYSQL_PASSWORD" "$MYSQL_ENV_MYSQL_PASSWORD"
 
 # Set phd and ssh user
 /opt/phabricator/phabricator/bin/config set phd.user phd
