@@ -4,12 +4,12 @@ function setVar() {
   local conf_name="$1" local_name="$2" local_val="$3" link_name="$4" link_val="$5"  
   if [ -n "$local_val" ]; then
   /opt/phabricator/phabricator/bin/config set "$conf_name" "$local_val"
-elif [ -n "$link_val"]; then
+elif [ -n "$link_val" ]; then
   # use link environment
   /opt/phabricator/phabricator/bin/config set "$conf_name" "$link_val"
 else
   echo "Error: $local_name is not set and not found in link environment! ($link_name)" 1>&2
-  exit(1)
+  exit 1
 fi
 }
 
