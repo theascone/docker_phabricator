@@ -22,7 +22,8 @@ RUN apt-get -y install \
     git \
     mercurial \
     subversion \
-    python-pygments
+    python-pygments \
+    sendmail
 
 RUN apt-get -y clean
 RUN apt-get -y autoclean
@@ -43,12 +44,12 @@ RUN chmod +x /opt/start.sh
 RUN mkdir /opt/phabricator
 WORKDIR /opt/phabricator
 
-ADD opt/phabricator/phabricator.sh /opt/phabricator/
-ADD opt/phabricator/setup.sh /opt/phabricator/
-
 RUN git clone https://github.com/phacility/libphutil.git
 RUN git clone https://github.com/phacility/arcanist.git
 RUN git clone https://github.com/phacility/phabricator.git
+
+ADD opt/phabricator/phabricator.sh /opt/phabricator/
+ADD opt/phabricator/setup.sh /opt/phabricator/
 
 RUN mkdir -p /opt/phabricator/phabricator/conf/custom
 
@@ -67,6 +68,8 @@ ADD opt/phabricator/var/config/config.conf.php /opt/phabricator/var/config/
 
 WORKDIR /opt/phabricator
 RUN chown -R phd .
+RUN mkdir -p /var/tmp/phd && chown -R phd:phd /var/tmp/phd
+RUN touch /var/log/aphlict.log && chown phd:phd /var/log/aphlict.log
 
 RUN mkdir /opt/supervisord
 WORKDIR /opt/supervisord

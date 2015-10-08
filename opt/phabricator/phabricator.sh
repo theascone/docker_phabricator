@@ -12,13 +12,15 @@ hterm()
 
 echo "Setting up"
 
-/opt/phabricator/setup.sh
+bash /opt/phabricator/setup.sh
 
-echo "Starting: phd aphlict"
+echo "Starting: phd"
 
-/opt/phabricator/phabricator/bin/phd start
-/opt/phabricator/phabricator/bin/phd restart
-/opt/phabricator/phabricator/bin/aphlict start
+#/opt/phabricator/phabricator/bin/phd start
+su -s /bin/sh -c '/opt/phabricator/phabricator/bin/phd start' phd
+
+echo "Starting: aphlict"
+su -s /bin/sh -c '/opt/phabricator/phabricator/bin/aphlict start' phd
 
 trap "hterm" TERM INT
 
