@@ -29,6 +29,8 @@ RUN apt-get -y clean
 RUN apt-get -y autoclean
 RUN apt-get -y autoremove
 
+RUN sendmailconfig
+
 RUN useradd -r -d / phd
 RUN useradd -r -d / vcs
 
