@@ -2,9 +2,9 @@ FROM debian:jessie
 
 MAINTAINER Addis Dittebrandt <addis.dittebrandt@gmail.com>
 
-RUN apt-get update
+RUN apt-get update && apt-get dist-upgrade -y
 
-RUN apt-get -y install \
+RUN apt-get -y --no-install-recommends install \
     sudo \
     supervisor \
     lighttpd \
@@ -40,8 +40,8 @@ RUN mkdir -p /var/storage
 
 RUN ln -s /usr/lib/git-core/git-http-backend /usr/bin/
 
-ADD opt/start.sh /opt/
-RUN chmod +x /opt/start.sh
+ADD opt/start.sh opt/setup.sh /opt/
+RUN chmod +x /opt/start.sh /opt/setup.sh
 
 RUN mkdir /opt/phabricator
 WORKDIR /opt/phabricator
