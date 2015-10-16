@@ -14,4 +14,7 @@ chown -R phd /var/repo
 chown -R phd /var/config
 chown -R www-data /var/storage
 
+# Various (sendmail)
+bash setup.sh
+
 exec supervisord -c /opt/supervisord/supervisord.conf
