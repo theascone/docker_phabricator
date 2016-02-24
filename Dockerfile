@@ -2,9 +2,11 @@ FROM debian:jessie
 
 MAINTAINER Addis Dittebrandt <addis.dittebrandt@gmail.com>
 
-RUN apt-get update && apt-get dist-upgrade -y \
+RUN    apt-get update && apt-get dist-upgrade -y \
     && apt-get -y --no-install-recommends install \
     sudo \
+    build-essential \
+    curl \
     supervisor \
     lighttpd \
     php5-cli \
@@ -15,10 +17,11 @@ RUN apt-get update && apt-get dist-upgrade -y \
     php5-json \
     php5-gd \
     php-apc \
-    npm \
-    nodejs-legacy \
     openssh-server \
+    ca-certificates \
     git \
+    nodejs \
+    npm \
     mercurial \
     subversion \
     python-pygments \
@@ -34,6 +37,8 @@ RUN apt-get update && apt-get dist-upgrade -y \
     && mkdir -p /var/storage \
     && ln -s /usr/lib/git-core/git-http-backend /usr/bin/
 
+RUN curl -sL https://deb.nodesource.com/setup | bash -
+
 ADD opt/start.sh opt/setup.sh /opt/
 RUN chmod +x /opt/start.sh /opt/setup.sh
 
@@ -42,7 +47,8 @@ WORKDIR /opt/phabricator
 
 RUN git clone https://github.com/phacility/libphutil.git \
     && git clone https://github.com/phacility/arcanist.git \
-    && git clone https://github.com/phacility/phabricator.git
+    && git clone https://github.com/phacility/phabricator.git \
+    && cd phabricator && git checkout stable
 
 ADD opt/phabricator/phabricator.sh \
     opt/phabricator/setup.sh \
@@ -57,7 +63,9 @@ RUN ln -s /var/config/preamble.php /opt/phabricator/phabricator/support/ \
 
 WORKDIR /opt/phabricator/phabricator/support/aphlict/server/
 
-RUN npm install ws \
+#   && node -v \
+RUN npm -g install npm \
+    && npm install ws \
     && mkdir -p /opt/phabricator/var/config
 
 ADD opt/phabricator/var/config/preamble.php \
