@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Set mysql config
-/opt/phabricator/phabricator/bin/config set mysql.host mysql
-/opt/phabricator/phabricator/bin/config set mysql.port $MYSQL_PORT_3306_TCP_PORT
+/opt/phabricator/phabricator/bin/config set mysql.host $MYSQL_HOST
+/opt/phabricator/phabricator/bin/config set mysql.port $MYSQL_PORT
 
 /opt/phabricator/phabricator/bin/config set mysql.user $MYSQL_USER
 /opt/phabricator/phabricator/bin/config set mysql.pass $MYSQL_PASS
