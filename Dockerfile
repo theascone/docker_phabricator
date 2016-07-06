@@ -39,9 +39,6 @@ RUN    apt-get update && apt-get dist-upgrade -y \
 
 RUN curl -sL https://deb.nodesource.com/setup | bash -
 
-ADD opt/start.sh opt/setup.sh /opt/
-RUN chmod +x /opt/start.sh /opt/setup.sh
-
 RUN mkdir /opt/phabricator
 WORKDIR /opt/phabricator
 
@@ -115,9 +112,11 @@ RUN mkdir /usr/libexec \
     && sed -i "s/^VCSUSER.*/VCSUSER=\"vcs\"/g" /usr/libexec/phabricator-ssh-hook.sh \
     && sed -i "s|^ROOT.*|ROOT=\"/opt/phabricator/phabricator\"|g" /usr/libexec/phabricator-ssh-hook.sh
 
-RUN cp /opt/phabricator/phabricator/resources/sshd/sshd_config.phabricator.example /etc/ssh/sshd_config.phabricator \
-    && sed -i "s|^AuthorizedKeysCommandUser\s.*|AuthorizedKeysCommandUser vcs|g" /etc/ssh/sshd_config.phabricator \
-    && sed -i "s|^AllowUsers\s.*|AllowUsers vcs|g" /etc/ssh/sshd_config.phabricator
+RUN cp /etc/ssh/ssh_config /tmp/ssh_config \
+    && rm /etc/ssh/ssh_host_*
+
+ADD opt/start.sh opt/setup.sh /opt/
+RUN chmod +x /opt/start.sh /opt/setup.sh
 
 EXPOSE 22 80 22280
 
