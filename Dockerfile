@@ -54,9 +54,12 @@ ADD opt/phabricator/phabricator.sh \
     opt/phabricator/setup.sh \
     /opt/phabricator/
 
-RUN mkdir -p /opt/phabricator/phabricator/conf/custom
+RUN mkdir -p /opt/phabricator/phabricator/conf/custom /opt/phabricator/phabricator/support/
 
 ADD opt/phabricator/phabricator/conf/local/ENVIRONMENT /opt/phabricator/phabricator/conf/local/
+
+ADD /var/config/preamble.php /var/config/config.conf.php \
+    /var/config/
 
 RUN ln -s /var/config/preamble.php /opt/phabricator/phabricator/support/ \
     && ln -s /var/config/config.conf.php /opt/phabricator/phabricator/conf/custom/
@@ -67,10 +70,6 @@ WORKDIR /opt/phabricator/phabricator/support/aphlict/server/
 RUN npm -g install npm \
     && npm install ws \
     && mkdir -p /opt/phabricator/var/config
-
-ADD opt/phabricator/var/config/preamble.php \
-    opt/phabricator/var/config/config.conf.php \
-    /opt/phabricator/var/config/
 
 WORKDIR /opt/phabricator
 RUN chown -R phd . \
