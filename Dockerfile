@@ -1,6 +1,6 @@
 FROM debian:jessie
 
-MAINTAINER Addis Dittebrandt <addis.dittebrandt@gmail.com>
+MAINTAINER Josia Roßkopf <josia-internet@rosskopfs.de>
 
 RUN    apt-get update && apt-get dist-upgrade -y \
     && apt-get -y --no-install-recommends install \
