@@ -99,7 +99,7 @@ RUN sed -i "s/disable_functions/;disable_functions/g" /etc/php5/cgi/php.ini \
     && sed -i "s/post_max_size =.*/post_max_size = 32M/g" /etc/php5/cgi/php.ini \
     && sed -i "s/^\(;\?\)opcache\.validate_timestamps.*/opcache.validate_timestamps=0/g" /etc/php5/cgi/php.ini
 
-RUN mkdir /var/run/sshd
+RUN mkdir -p /var/run/sshd
 
 ADD etc/sudoers.d/30-phabricator /etc/sudoers.d/
 
@@ -116,9 +116,9 @@ RUN cp /etc/ssh/ssh_config /tmp/ssh_config \
     && rm /etc/ssh/ssh_host_*
 
 ADD opt/start.sh opt/setup.sh /opt/
-RUN chmod +x /opt/start.sh /opt/setup.sh
+RUN chmod +x /opt/setup.sh /opt/start.sh
 
-EXPOSE 22 80 22280
+EXPOSE 22 22280 80
 
 VOLUME /var/repo /var/config /var/storage
 
